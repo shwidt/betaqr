@@ -82,24 +82,15 @@ async function startCamera() {
         track = stream.getVideoTracks()[0];
         video.srcObject = stream;
 
-        // Используем ML Kit для распознавания QR-кодов
-        const vision = new firebase.ml.vision();
-        const barcodeDetector = vision.barcodeDetector();
-
-        // Обработка видео потока
-        const processVideo = async () => {
-            const image = new Image();
-            image.src = video.srcObject;
-
-            const barcodes = await barcodeDetector.detect(image);
-            if (barcodes.length > 0) {
-                handleScanResult(barcodes[0].rawValue); // Обработка результата
+        // Увеличиваем частоту сканирования
+        codeReader.decodeFromVideoDevice(deviceId, video, (result, err) => {
+            if (result) {
+                handleScanResult(result.text);
             }
-
-            requestAnimationFrame(processVideo); // Запускаем следующий кадр
-        };
-
-        processVideo(); // Начинаем обработку видео
+            if (err && !(err instanceof ZXing.NotFoundException)) {
+                console.error("Ошибка сканирования:", err);
+            }
+        });
     } catch (error) {
         console.error("Ошибка доступа к камере:", error);
         output.innerHTML = `<h3>Ошибка:</h3><p>Не удалось получить доступ к камере. Разрешите доступ в настройках.</p>`;
