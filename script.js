@@ -268,7 +268,8 @@ function capturePhoto() {
 
     // Получаем текущую дату и время
     const now = new Date();
-    const timestamp = now.toLocaleString(); // Форматируем дату и время
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
+    const timestamp = now.toLocaleString('ru-RU', options).replace(',', ''); // Форматируем дату и время
 
     // Получаем геолокацию
     navigator.geolocation.getCurrentPosition(async (position) => {
