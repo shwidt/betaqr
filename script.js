@@ -25,18 +25,6 @@ let lastScannedData = null;
 let lastScanTime = 0;
 const SCAN_COOLDOWN = 2000; // 2 секунды
 
-// Инициализация Firebase
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-firebase.initializeApp(firebaseConfig);
-
 async function loadModel() {
     model = await mobilenet.load();
     console.log("Модель MobileNet загружена.");
@@ -72,16 +60,6 @@ async function startCamera() {
 
         const deviceId = rearCamera ? rearCamera.deviceId : videoDevices[0].deviceId;
 
-        // Запрашиваем доступ к камере
-        stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                deviceId: { exact: deviceId },
-                facingMode: { ideal: "environment" }
-            }
-        });
-        track = stream.getVideoTracks()[0];
-        video.srcObject = stream;
-
         // Увеличиваем частоту сканирования
         codeReader.decodeFromVideoDevice(deviceId, video, (result, err) => {
             if (result) {
@@ -91,6 +69,15 @@ async function startCamera() {
                 console.error("Ошибка сканирования:", err);
             }
         });
+
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                deviceId: { exact: deviceId },
+                facingMode: { ideal: "environment" }
+            }
+        });
+        track = stream.getVideoTracks()[0];
+        video.srcObject = stream;
     } catch (error) {
         console.error("Ошибка доступа к камере:", error);
         output.innerHTML = `<h3>Ошибка:</h3><p>Не удалось получить доступ к камере. Разрешите доступ в настройках.</p>`;
@@ -328,6 +315,3 @@ async function getAddress(latitude, longitude) {
 
 // Добавляем обработчик события для кнопки захвата фото
 captureButton.addEventListener('click', capturePhoto);
-
-// Запуск камеры
-startCamera();
