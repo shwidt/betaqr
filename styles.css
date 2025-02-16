@@ -88,14 +88,35 @@ video {
 
 #output {
     margin-top: 10px; /* Уменьшил отступ */
-    padding: 10px;
+    padding: 15px; /* Увеличил отступ для лучшего восприятия */
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Добавил тень для глубины */
     text-align: left;
     color: #fff;
-    max-height: 100px; /* Уменьшил высоту окошка выдачи результата */
+    max-height: 150px; /* Увеличил высоту окошка выдачи результата */
     overflow-y: auto; /* Слайд-меню результатов */
+    transition: background 0.3s ease; /* Плавный переход фона */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Добавил границу */
+}
+
+#output h3 {
+    font-size: 1.5em; /* Увеличил размер заголовка */
+    margin-bottom: 10px; /* Отступ снизу */
+    color: #ffcc00; /* Цвет заголовка */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Тень для заголовка */
+}
+
+#output p {
+    margin: 5px 0; /* Отступы между параграфами */
+    font-size: 1.1em; /* Увеличил размер шрифта для текста */
+    line-height: 1.5; /* Увеличил межстрочный интервал */
+}
+
+/* Добавим эффект при наведении на результаты */
+#output:hover {
+    background: rgba(255, 255, 255, 0.2); /* Изменение фона при наведении */
+    border-color: rgba(255, 255, 255, 0.5); /* Изменение цвета границы при наведении */
 }
 
 .button-container {
