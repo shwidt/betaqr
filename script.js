@@ -255,9 +255,6 @@ function capturePhoto() {
     canvas.height = video.videoHeight; // Устанавливаем высоту
     context.drawImage(video, 0, 0, canvas.width, canvas.height); // Рисуем изображение с видео
 
-    // Получаем данные изображения в формате base64
-    const photoData = canvas.toDataURL('image/png');
-
     // Получаем текущую дату и время
     const now = new Date();
     const timestamp = now.toLocaleString(); // Форматируем дату и время
@@ -266,12 +263,25 @@ function capturePhoto() {
     navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
         const geoInfo = `Широта: ${latitude.toFixed(4)}, Долгота: ${longitude.toFixed(4)}`;
-        
+
+        // Добавляем текст на изображение
+        context.fillStyle = 'white'; // Цвет текста
+        context.font = '20px Arial'; // Шрифт текста
+        context.fillText(`Фото сделано: ${timestamp}`, 10, 30); // Время и дата
+        context.fillText(geoInfo, 10, 60); // Геолокация
+
+        // Получаем данные изображения в формате base64
+        const photoData = canvas.toDataURL('image/png');
+
+        // Создаем ссылку для скачивания
+        const link = document.createElement('a');
+        link.href = photoData;
+        link.download = `photo_${timestamp}.png`; // Имя файла
+        link.click(); // Имитируем клик для скачивания
+
         // Обновляем информацию о фото
         photoInfo.innerHTML = `<p>Фото сделано: ${timestamp}</p><p>${geoInfo}</p>`;
     });
-
-    // Здесь можно сохранить или использовать photoData
 }
 
 // Добавляем обработчик события для кнопки захвата фото
