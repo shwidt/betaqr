@@ -252,9 +252,10 @@ function capturePhoto() {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
-    // Устанавливаем высокое разрешение для захвата
-    const photoWidth = 1920; // Ширина фото
-    const photoHeight = 1080; // Высота фото
+    // Определяем разрешение в зависимости от устройства
+    const devicePixelRatio = window.devicePixelRatio || 1; // Получаем плотность пикселей
+    const photoWidth = Math.floor(1920 * devicePixelRatio); // Ширина фото с учетом плотности
+    const photoHeight = Math.floor(1080 * devicePixelRatio); // Высота фото с учетом плотности
     canvas.width = photoWidth;
     canvas.height = photoHeight;
 
