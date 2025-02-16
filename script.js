@@ -303,7 +303,13 @@ function capturePhoto() {
 async function getAddress(latitude, longitude) {
     const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
     const data = await response.json();
-    return data.display_name || 'Адрес не найден';
+    
+    // Извлекаем только улицу, дом и город
+    const street = data.address.road || '';
+    const houseNumber = data.address.house_number ? `, ${data.address.house_number}` : '';
+    const city = data.address.city || data.address.town || data.address.village || '';
+
+    return `${street}${houseNumber}, ${city}`.trim() || 'Адрес не найден';
 }
 
 // Добавляем обработчик события для кнопки захвата фото
