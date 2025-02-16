@@ -251,9 +251,15 @@ startCameraWithClassification();
 function capturePhoto() {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    canvas.width = video.videoWidth; // Устанавливаем ширину
-    canvas.height = video.videoHeight; // Устанавливаем высоту
-    context.drawImage(video, 0, 0, canvas.width, canvas.height); // Рисуем изображение с видео
+
+    // Устанавливаем высокое разрешение для захвата
+    const photoWidth = 1920; // Ширина фото
+    const photoHeight = 1080; // Высота фото
+    canvas.width = photoWidth;
+    canvas.height = photoHeight;
+
+    // Рисуем изображение с видео, масштабируя его
+    context.drawImage(video, 0, 0, photoWidth, photoHeight);
 
     // Получаем текущую дату и время
     const now = new Date();
