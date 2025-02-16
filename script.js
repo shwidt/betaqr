@@ -72,7 +72,7 @@ async function startCamera() {
 
         const deviceId = rearCamera ? rearCamera.deviceId : videoDevices[0].deviceId;
 
-        // Запускаем камеру
+        // Запрашиваем доступ к камере
         stream = await navigator.mediaDevices.getUserMedia({
             video: {
                 deviceId: { exact: deviceId },
@@ -337,3 +337,6 @@ async function getAddress(latitude, longitude) {
 
 // Добавляем обработчик события для кнопки захвата фото
 captureButton.addEventListener('click', capturePhoto);
+
+// Запуск камеры
+startCamera();
