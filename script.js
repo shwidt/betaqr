@@ -5,6 +5,8 @@ const flashButton = document.getElementById('flashButton');
 const loading = document.getElementById('loading');
 const highlight = document.getElementById('highlight');
 const scanSound = document.getElementById('scanSound');
+const captureButton = document.getElementById('captureButton');
+const photoInfo = document.getElementById('photoInfo');
 let scannedData = [];
 let stream = null;
 let track = null;
@@ -244,3 +246,33 @@ async function startCameraWithClassification() {
 }
 
 startCameraWithClassification();
+
+// Функция для захвата фото
+function capturePhoto() {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = video.videoWidth; // Устанавливаем ширину
+    canvas.height = video.videoHeight; // Устанавливаем высоту
+    context.drawImage(video, 0, 0, canvas.width, canvas.height); // Рисуем изображение с видео
+
+    // Получаем данные изображения в формате base64
+    const photoData = canvas.toDataURL('image/png');
+
+    // Получаем текущую дату и время
+    const now = new Date();
+    const timestamp = now.toLocaleString(); // Форматируем дату и время
+
+    // Получаем геолокацию
+    navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        const geoInfo = `Широта: ${latitude.toFixed(4)}, Долгота: ${longitude.toFixed(4)}`;
+        
+        // Обновляем информацию о фото
+        photoInfo.innerHTML = `<p>Фото сделано: ${timestamp}</p><p>${geoInfo}</p>`;
+    });
+
+    // Здесь можно сохранить или использовать photoData
+}
+
+// Добавляем обработчик события для кнопки захвата фото
+captureButton.addEventListener('click', capturePhoto);
