@@ -252,10 +252,14 @@ function capturePhoto() {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
+    // Получаем фактические размеры видео
+    const videoWidth = video.videoWidth;
+    const videoHeight = video.videoHeight;
+
     // Определяем разрешение в зависимости от устройства
     const devicePixelRatio = window.devicePixelRatio || 1; // Получаем плотность пикселей
-    const photoWidth = Math.floor(window.innerWidth * devicePixelRatio); // Ширина фото с учетом плотности
-    const photoHeight = Math.floor(window.innerHeight * devicePixelRatio); // Высота фото с учетом плотности
+    const photoWidth = Math.floor(videoWidth * devicePixelRatio); // Ширина фото с учетом плотности
+    const photoHeight = Math.floor(videoHeight * devicePixelRatio); // Высота фото с учетом плотности
     canvas.width = photoWidth;
     canvas.height = photoHeight;
 
