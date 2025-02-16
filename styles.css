@@ -179,3 +179,10 @@ button:hover {
 .prefix-dropdown button:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
+
+.scan-buttons {
+    display: flex; /* Используем Flexbox для горизонтального расположения */
+    justify-content: space-between; /* Распределяем пространство между кнопками */
+    width: 100%; /* Задаем ширину для контейнера кнопок */
+    gap: 10px; /* Отступ между кнопками */
+}
