@@ -260,15 +260,19 @@ function capturePhoto() {
     const timestamp = now.toLocaleString(); // Форматируем дату и время
 
     // Получаем геолокацию
-    navigator.geolocation.getCurrentPosition((position) => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
         const geoInfo = `Широта: ${latitude.toFixed(4)}, Долгота: ${longitude.toFixed(4)}`;
+
+        // Получаем адрес по координатам
+        const address = await getAddress(latitude, longitude);
 
         // Добавляем текст на изображение
         context.fillStyle = 'white'; // Цвет текста
         context.font = '20px Arial'; // Шрифт текста
         context.fillText(`Фото сделано: ${timestamp}`, 10, 30); // Время и дата
         context.fillText(geoInfo, 10, 60); // Геолокация
+        context.fillText(`Адрес: ${address}`, 10, 90); // Адрес
 
         // Получаем данные изображения в формате base64
         const photoData = canvas.toDataURL('image/png');
@@ -280,8 +284,15 @@ function capturePhoto() {
         link.click(); // Имитируем клик для скачивания
 
         // Обновляем информацию о фото
-        photoInfo.innerHTML = `<p>Фото сделано: ${timestamp}</p><p>${geoInfo}</p>`;
+        photoInfo.innerHTML = `<p>Фото сделано: ${timestamp}</p><p>${geoInfo}</p><p>Адрес: ${address}</p>`;
     });
+}
+
+// Функция для получения адреса по координатам
+async function getAddress(latitude, longitude) {
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+    const data = await response.json();
+    return data.display_name || 'Адрес не найден';
 }
 
 // Добавляем обработчик события для кнопки захвата фото
