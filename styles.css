@@ -245,8 +245,8 @@ button:active {
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 600px) {
     .button-container {
-        flex-direction: column; /* Вертикальное расположение для мобильных */
-        align-items: stretch; /* Растягиваем кнопки на всю ширину */
+        flex-direction: row; /* Горизонтальное расположение для мобильных */
+        justify-content: center; /* Центрируем кнопки по горизонтали */
     }
 
     button {
