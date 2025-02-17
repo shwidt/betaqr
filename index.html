@@ -12,7 +12,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="loading-logo" id="loadingLogo">
+        <span class="letter">S</span>
+        <span class="letter">H</span>
+        <span class="letter">W</span>
+        <span class="letter">I</span>
+        <span class="letter">D</span>
+        <span class="letter">T</span>
+        <div class="version">v 1.0 beta</div>
+    </div>
+    <div class="container" style="display: none;">
         <div class="video-container">
             <video id="camera" autoplay playsinline></video>
             <div id="overlay">
@@ -21,7 +30,13 @@
         </div>
         <div class="result-container" id="output">
             <h3>Результат сканирования:</h3>
-            <p>Тут появятся данные из QR-кода...</p>
+            <div class="scan-item">
+                <span class="scan-text">Тут появятся данные из QR-кода...</span>
+                <div class="scan-buttons">
+                    <button class="btn-prefix"><i class="fas fa-tag"></i> Добавить префикс</button>
+                    <button class="btn-delete"><i class="fas fa-trash"></i> Удалить</button>
+                </div>
+            </div>
         </div>
         <div class="button-container">
             <button id="copyButton" class="btn-copy"><i class="fas fa-copy"></i> Скопировать всё</button>
