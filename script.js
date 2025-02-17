@@ -315,3 +315,14 @@ async function getAddress(latitude, longitude) {
 
 // Добавляем обработчик события для кнопки захвата фото
 captureButton.addEventListener('click', capturePhoto);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const loadingLogo = document.getElementById("loadingLogo");
+    const container = document.querySelector('.container');
+
+    // Убираем логотип через 3 секунды
+    setTimeout(() => {
+        loadingLogo.style.display = 'none'; // Скрываем логотип
+        container.style.display = 'flex'; // Показываем основной контейнер
+    }, 3000); // Задержка, равная времени анимации
+});
