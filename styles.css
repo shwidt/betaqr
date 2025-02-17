@@ -210,14 +210,14 @@ video {
 
 .button-container {
     display: flex;
-    flex-wrap: wrap; /* Позволяет кнопкам переноситься на новую строку */
-    justify-content: space-between; /* Распределяем пространство между кнопками */
-    gap: 5px; /* Уменьшение отступа между кнопками */
+    flex-direction: column; /* Вертикальное расположение кнопок */
+    align-items: center; /* Центрируем кнопки по горизонтали */
+    gap: 10px; /* Отступ между кнопками */
     margin-top: 10px;
 }
 
 button {
-    width: 150px; /* Фиксированная ширина для всех кнопок */
+    width: 100%; /* Кнопки занимают 100% ширины контейнера */
     height: 50px; /* Фиксированная высота для всех кнопок */
     padding: 10px; /* Отступы внутри кнопки */
     font-size: 14px; /* Размер шрифта */
@@ -236,18 +236,6 @@ button {
 .btn-capture {
     background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
     color: #ffffff; /* Цвет текста */
-    padding: 10px; /* Отступы внутри кнопки */
-    font-size: 14px; /* Размер шрифта */
-    border: none; /* Убираем границу */
-    border-radius: 8px; /* Закругленные углы */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Тень для глубины */
-    transition: background 0.3s ease, transform 0.2s ease; /* Плавные переходы */
-    cursor: pointer; /* Указатель при наведении */
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Центрируем текст и иконку */
-    width: 150px; /* Фиксированная ширина для всех кнопок */
-    height: 50px; /* Фиксированная высота для всех кнопок */
 }
 
 .btn-capture:hover {
@@ -283,8 +271,12 @@ button {
         font-size: 12px; /* Уменьшение размера шрифта для версии */
     }
 
+    .button-container {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        align-items: stretch; /* Растягиваем кнопки на всю ширину */
+    }
+
     button {
-        width: 100%; /* Кнопки занимают 100% ширины на мобильных */
         height: 40px; /* Уменьшение высоты кнопок на мобильных */
         font-size: 12px; /* Уменьшение размера шрифта на мобильных */
     }
