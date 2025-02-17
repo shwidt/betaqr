@@ -1,39 +1,128 @@
+@font-face {
+    font-family: '8bit-wonder';
+    src: url('fonts/8bitwonderrusbylyajka_nominal.otf') format('opentype'); /* Укажите путь к файлу шрифта */
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Основные стили */
 body, html {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Используем шрифт Roboto */
     margin: 0;
     padding: 0;
     background: #1a1a1a; /* Статический фон */
-    color: #fff;
+    color: #fff; /* Цвет текста */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     text-align: center;
     overflow: hidden; /* Отключаем скролл */
+    animation: fadeIn 0.5s ease; /* Анимация появления фона */
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    padding: 20px;
+    padding: 20px; /* Увеличиваем отступы */
     box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
     max-width: 90vw; /* Адаптивная ширина */
     width: 100%;
     max-height: 90vh; /* Ограничиваем высоту контейнера */
-    height: 90vh; /* Фиксированная высота */
+    height: auto; /* Автоматическая высота */
     overflow: hidden; /* Скрываем содержимое, выходящее за пределы */
     display: flex;
     flex-direction: column;
     gap: 10px; /* Уменьшил отступы между элементами */
 }
 
-h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px; /* Уменьшил отступ */
-    font-weight: 700;
-    color: #fff;
+.loading-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row; /* Устанавливаем горизонтальное расположение */
+    font-family: '8bit-wonder', cursive; /* Используем новый шрифт в стиле 8-bit */
+    font-size: 48px; /* Размер шрифта */
+    color: #ffffff; /* Цвет текста */
+    margin-bottom: 20px; /* Отступ снизу */
+    padding: 0 5px; /* Увеличиваем отступы на 5 пикселей слева и справа */
+    opacity: 0; /* Начальная непрозрачность */
+    animation: fadeIn 1s forwards, glitch 1.5s infinite; /* Плавное появление логотипа и эффект глитча */
+    text-shadow: 
+        2px 2px 0 rgba(255, 0, 0, 0.7), /* Красная тень для эффекта анаглифа */
+        -2px -2px 0 rgba(0, 0, 255, 0.7), /* Синяя тень для эффекта анаглифа */
+        0 0 5px rgba(255, 255, 255, 0.5); /* Неоновый эффект */
+    max-height: 100px; /* Ограничиваем высоту логотипа */
+    overflow: hidden; /* Скрываем выходящие за пределы элементы */
+}
+
+.version {
+    font-family: 'Roboto', sans-serif; /* Используем шрифт Roboto для версии */
+    font-size: 14px; /* Размер шрифта */
+    color: rgba(255, 255, 255, 0.8); /* Цвет текста */
+    margin-left: -10px; /* Сдвиг текста на 10 пикселей влево */
+    margin-top: 5px; /* Отступ сверху */
+    margin-right: 10px; /* Увеличиваем отступ справа на 10 пикселей */
+    padding-right: 10px; /* Увеличиваем границы текста на 10 пикселей вправо */
+    opacity: 0; /* Начальная непрозрачность */
+    animation: fadeIn 1s forwards; /* Плавное появление версии */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+        opacity: 1;
+    }
+    10% {
+        transform: translate(-1px, 1px);
+        opacity: 0.8;
+    }
+    20% {
+        transform: translate(1px, -1px);
+        opacity: 0.6;
+    }
+    30% {
+        transform: translate(-1px, 1px);
+        opacity: 0.8;
+    }
+    40% {
+        transform: translate(1px, -1px);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(0);
+        opacity: 1;
+    }
+    60% {
+        transform: translate(-1px, 1px);
+        opacity: 0.8;
+    }
+    70% {
+        transform: translate(1px, -1px);
+        opacity: 0.6;
+    }
+    80% {
+        transform: translate(-1px, 1px);
+        opacity: 0.8;
+    }
+    90% {
+        transform: translate(1px, -1px);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
 }
 
 .video-container {
@@ -103,7 +192,7 @@ video {
 #output h3 {
     font-size: 1.5em; /* Увеличил размер заголовка */
     margin-bottom: 10px; /* Отступ снизу */
-    color: #ffcc00; /* Цвет заголовка */
+    color: #ffffff; /* Цвет заголовка */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Тень для заголовка */
 }
 
@@ -121,29 +210,53 @@ video {
 
 .button-container {
     display: flex;
-    justify-content: space-between;
-    gap: 10px; /* Уменьшил отступ между кнопками */
+    flex-wrap: wrap; /* Позволяет кнопкам переноситься на новую строку */
+    justify-content: space-between; /* Распределяем пространство между кнопками */
+    gap: 5px; /* Уменьшение отступа между кнопками */
     margin-top: 10px;
 }
 
 button {
-    padding: 10px 20px; /* Увеличил размер кнопок */
-    font-size: 14px; /* Увеличил размер шрифта */
+    width: 150px; /* Фиксированная ширина для всех кнопок */
+    height: 50px; /* Фиксированная высота для всех кнопок */
+    padding: 10px; /* Отступы внутри кнопки */
+    font-size: 14px; /* Размер шрифта */
     cursor: pointer;
     border: none;
-    border-radius: 8px;
-    transition: background 0.3s ease, transform 0.2s ease;
+    border-radius: 8px; /* Закругленные углы */
+    transition: background 0.3s ease, transform 0.2s ease; /* Плавные переходы */
     display: flex;
     align-items: center;
-    gap: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    justify-content: center; /* Центрируем текст и иконку */
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
+    color: #ffffff; /* Цвет текста */
     animation: fadeIn 0.5s ease; /* Анимация появления */
 }
 
-button:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.2);
+.btn-capture {
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
+    color: #ffffff; /* Цвет текста */
+    padding: 10px; /* Отступы внутри кнопки */
+    font-size: 14px; /* Размер шрифта */
+    border: none; /* Убираем границу */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Тень для глубины */
+    transition: background 0.3s ease, transform 0.2s ease; /* Плавные переходы */
+    cursor: pointer; /* Указатель при наведении */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрируем текст и иконку */
+    width: 150px; /* Фиксированная ширина для всех кнопок */
+    height: 50px; /* Фиксированная высота для всех кнопок */
+}
+
+.btn-capture:hover {
+    background: rgba(255, 255, 255, 0.2); /* Изменение фона при наведении */
+    transform: scale(1.05); /* Увеличение кнопки при наведении */
+}
+
+.btn-capture:active {
+    transform: scale(0.95); /* Уменьшение кнопки при нажатии */
 }
 
 @keyframes fadeIn {
@@ -153,13 +266,33 @@ button:hover {
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 600px) {
-    button {
-        font-size: 12px; /* Уменьшение размера шрифта на мобильных */
-        padding: 8px 16px; /* Уменьшение размера кнопок на мобильных */
+    body, html {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        align-items: stretch; /* Растягиваем элементы на всю ширину */
     }
 
     .container {
         padding: 10px; /* Уменьшение отступов на мобильных */
+    }
+
+    .loading-logo {
+        font-size: 36px; /* Уменьшение размера шрифта для логотипа */
+    }
+
+    .version {
+        font-size: 12px; /* Уменьшение размера шрифта для версии */
+    }
+
+    button {
+        width: 100%; /* Кнопки занимают 100% ширины на мобильных */
+        height: 40px; /* Уменьшение высоты кнопок на мобильных */
+        font-size: 12px; /* Уменьшение размера шрифта на мобильных */
+    }
+
+    .scan-buttons button {
+        width: 60px; /* Уменьшение ширины кнопок в результатах сканирования */
+        height: 30px; /* Уменьшение высоты кнопок в результатах сканирования */
+        font-size: 10px; /* Уменьшение размера шрифта для кнопок в результатах */
     }
 }
 
@@ -201,9 +334,41 @@ button:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.scan-buttons {
+.scan-item {
     display: flex; /* Используем Flexbox для горизонтального расположения */
-    justify-content: space-between; /* Распределяем пространство между кнопками */
-    width: 100%; /* Задаем ширину для контейнера кнопок */
-    gap: 5px; /* Уменьшение отступа между кнопками */
+    justify-content: space-between; /* Распределяем пространство между текстом и кнопками */
+    align-items: center; /* Центрируем по вертикали */
+    margin-bottom: 10px; /* Отступ между элементами */
+}
+
+.scan-text {
+    flex: 1; /* Позволяем тексту занимать оставшееся пространство */
+    margin-right: 10px; /* Отступ между текстом и кнопками */
+}
+
+.scan-buttons {
+    display: flex; /* Используем Flexbox для кнопок */
+    gap: 5px; /* Отступ между кнопками */
+}
+
+.new-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row; /* Устанавливаем горизонтальное расположение */
+    font-family: '8bit-wonder', cursive; /* Используем новый шрифт в стиле 8-bit */
+    font-size: 48px; /* Размер шрифта */
+    color: #ffffff; /* Цвет текста */
+    margin-bottom: 20px; /* Отступ снизу */
+    opacity: 0; /* Начальная непрозрачность */
+    animation: fadeIn 1s forwards; /* Плавное появление нового логотипа */
+}
+
+.scout-text {
+    font-family: 'Roboto', sans-serif; /* Используем шрифт Roboto для текста */
+    font-size: 12px; /* Мелкий шрифт */
+    color: rgba(255, 255, 255, 0.8); /* Цвет текста */
+    margin-top: 5px; /* Отступ сверху */
+    opacity: 0; /* Начальная непрозрачность */
+    animation: fadeIn 1s forwards; /* Плавное появление текста */
 }
