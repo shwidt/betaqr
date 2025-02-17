@@ -7,6 +7,7 @@ const highlight = document.getElementById('highlight');
 const scanSound = document.getElementById('scanSound');
 const captureButton = document.getElementById('captureButton');
 const photoInfo = document.getElementById('photoInfo');
+const scanButtons = document.querySelector('.scan-buttons');
 let scannedData = [];
 let stream = null;
 let track = null;
@@ -122,6 +123,7 @@ function renderScannedData() {
     output.innerHTML = `<h3>Результат сканирования:</h3>`;
     if (scannedData.length === 0) {
         output.innerHTML += `<p>Нет данных для отображения.</p>`;
+        scanButtons.style.display = 'none'; // Скрываем кнопки, если нет данных
     } else {
         scannedData.forEach((item, index) => {
             const scanItem = document.createElement("div");
@@ -161,6 +163,7 @@ function renderScannedData() {
             scanItem.appendChild(buttonsDiv);
             output.appendChild(scanItem);
         });
+        scanButtons.style.display = 'flex'; // Показываем кнопки, если есть данные
     }
 }
 
@@ -319,10 +322,18 @@ captureButton.addEventListener('click', capturePhoto);
 document.addEventListener("DOMContentLoaded", function() {
     const loadingLogo = document.getElementById("loadingLogo");
     const container = document.querySelector('.container');
+    const output = document.getElementById('output');
+    const scanButtons = document.querySelector('.scan-buttons');
 
     // Убираем логотип через 3 секунды
     setTimeout(() => {
         loadingLogo.style.display = 'none'; // Скрываем логотип
         container.style.display = 'flex'; // Показываем основной контейнер
-    }, 3000); // Задержка, равная времени анимации
+
+        // Пример: показываем результат сканирования
+        setTimeout(() => {
+            output.style.display = 'block'; // Показываем результаты
+            scanButtons.style.display = 'flex'; // Показываем кнопки
+        }, 1000); // Задержка для демонстрации
+    }, 3000); // Время до начала стирания
 });
