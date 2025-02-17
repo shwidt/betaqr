@@ -209,15 +209,15 @@ video {
 }
 
 .button-container {
-    display: flex;
-    flex-direction: column; /* Вертикальное расположение кнопок */
-    align-items: center; /* Центрируем кнопки по горизонтали */
+    display: flex; /* Используем Flexbox для горизонтального расположения */
+    justify-content: space-between; /* Распределяем пространство между кнопками */
+    align-items: center; /* Центрируем кнопки по вертикали */
     gap: 10px; /* Отступ между кнопками */
     margin-top: 10px;
 }
 
 button {
-    width: 100%; /* Кнопки занимают 100% ширины контейнера */
+    width: 150px; /* Фиксированная ширина для всех кнопок */
     height: 50px; /* Фиксированная высота для всех кнопок */
     padding: 10px; /* Отступы внутри кнопки */
     font-size: 14px; /* Размер шрифта */
@@ -231,6 +231,28 @@ button {
     background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
     color: #ffffff; /* Цвет текста */
     animation: fadeIn 0.5s ease; /* Анимация появления */
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.2); /* Изменение фона при наведении */
+    transform: scale(1.05); /* Увеличение кнопки при наведении */
+}
+
+button:active {
+    transform: scale(0.95); /* Уменьшение кнопки при нажатии */
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        align-items: stretch; /* Растягиваем кнопки на всю ширину */
+    }
+
+    button {
+        height: 40px; /* Уменьшение высоты кнопок на мобильных */
+        font-size: 12px; /* Уменьшение размера шрифта на мобильных */
+    }
 }
 
 .btn-capture {
@@ -250,42 +272,6 @@ button {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-/* Адаптивные стили для мобильных устройств */
-@media (max-width: 600px) {
-    body, html {
-        flex-direction: column; /* Вертикальное расположение для мобильных */
-        align-items: stretch; /* Растягиваем элементы на всю ширину */
-    }
-
-    .container {
-        padding: 10px; /* Уменьшение отступов на мобильных */
-    }
-
-    .loading-logo {
-        font-size: 36px; /* Уменьшение размера шрифта для логотипа */
-    }
-
-    .version {
-        font-size: 12px; /* Уменьшение размера шрифта для версии */
-    }
-
-    .button-container {
-        flex-direction: column; /* Вертикальное расположение для мобильных */
-        align-items: stretch; /* Растягиваем кнопки на всю ширину */
-    }
-
-    button {
-        height: 40px; /* Уменьшение высоты кнопок на мобильных */
-        font-size: 12px; /* Уменьшение размера шрифта на мобильных */
-    }
-
-    .scan-buttons button {
-        width: 60px; /* Уменьшение ширины кнопок в результатах сканирования */
-        height: 30px; /* Уменьшение высоты кнопок в результатах сканирования */
-        font-size: 10px; /* Уменьшение размера шрифта для кнопок в результатах */
-    }
 }
 
 /* Остальные стили остаются без изменений */
@@ -341,6 +327,42 @@ button {
 .scan-buttons {
     display: flex; /* Используем Flexbox для кнопок */
     gap: 5px; /* Отступ между кнопками */
+}
+
+.scan-buttons button {
+    width: 70px; /* Фиксированная ширина для кнопок */
+    height: 30px; /* Фиксированная высота для кнопок */
+    padding: 5px; /* Уменьшенные отступы внутри кнопки */
+    font-size: 12px; /* Уменьшенный размер шрифта */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px; /* Закругленные углы */
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
+    color: #ffffff; /* Цвет текста */
+    transition: background 0.3s ease, transform 0.2s ease; /* Плавные переходы */
+}
+
+.scan-buttons button:hover {
+    background: rgba(255, 255, 255, 0.2); /* Изменение фона при наведении */
+    transform: scale(1.05); /* Увеличение кнопки при наведении */
+}
+
+.scan-buttons button:active {
+    transform: scale(0.95); /* Уменьшение кнопки при нажатии */
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 600px) {
+    .scan-item {
+        flex-direction: row; /* Горизонтальное расположение для мобильных */
+        justify-content: space-between; /* Распределяем пространство между текстом и кнопками */
+    }
+
+    .scan-buttons button {
+        width: 60px; /* Уменьшение ширины кнопок в результатах сканирования */
+        height: 30px; /* Уменьшение высоты кнопок в результатах сканирования */
+        font-size: 10px; /* Уменьшение размера шрифта для кнопок в результатах */
+    }
 }
 
 .new-logo {
