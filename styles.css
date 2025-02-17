@@ -217,19 +217,19 @@ video {
 }
 
 button {
-    width: 150px; /* Фиксированная ширина для всех кнопок */
-    height: 50px; /* Фиксированная высота для всех кнопок */
-    padding: 10px; /* Отступы внутри кнопки */
-    font-size: 14px; /* Размер шрифта */
+    width: 50px; /* Фиксированная ширина для кнопок с иконками */
+    height: 50px; /* Фиксированная высота для кнопок */
+    padding: 0; /* Убираем отступы внутри кнопки */
+    font-size: 14px; /* Размер шрифта (не будет видно, но оставим для совместимости) */
     cursor: pointer;
     border: none;
     border-radius: 8px; /* Закругленные углы */
     transition: background 0.3s ease, transform 0.2s ease; /* Плавные переходы */
     display: flex;
     align-items: center;
-    justify-content: center; /* Центрируем текст и иконку */
+    justify-content: center; /* Центрируем иконки */
     background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
-    color: #ffffff; /* Цвет текста */
+    color: #ffffff; /* Цвет текста (не будет видно, но оставим для совместимости) */
     animation: fadeIn 0.5s ease; /* Анимация появления */
 }
 
